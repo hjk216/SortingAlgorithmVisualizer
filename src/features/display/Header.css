@@ -1,0 +1,16 @@
+#header_title {
+    margin-left: 20px;
+}
+
+.nav_link {
+    color: white !important;
+}
+
+#random_button {
+    color: orangered !important;
+}
+
+.nav_link:hover, #random_button:hover {
+    cursor: pointer !important;
+    color: greenyellow !important;
+}

@@ -6,7 +6,7 @@ import SelectionSort from '../algorithms/selectionSort'
 import './Display.css'
 import './Header.css'
 
-const ARRAY_LENGTH = 20
+const ARRAY_LENGTH = 30
 
 
 

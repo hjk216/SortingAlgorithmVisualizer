@@ -6,7 +6,11 @@ import SelectionSort from '../algorithms/selectionSort'
 import './Display.css'
 import './Header.css'
 
-const ARRAY_LENGTH = 30
+
+
+const ARRAY_LENGTH = 10;
+
+const SPEED = 100;
 
 
 
@@ -27,6 +31,24 @@ export default class Display extends React.Component {
 
 
 
+    disableButtons(action) {
+        var buttons = document.getElementsByClassName('nav_link');
+        if(action === 'disable') {
+            for(var b = 0; b < buttons.length; b++) {
+                buttons[b].style.opacity = 0.5;
+                buttons[b].disabled = 'true';
+            }
+        }
+        else {
+            for(var c = 0; c < buttons.length; c++) {
+                buttons[c].style.opacity = 1;
+                buttons[c].disabled = false;
+            }
+        }
+    }
+
+
+
     randomizeArray() {
         var array = []
 
@@ -42,18 +64,14 @@ export default class Display extends React.Component {
     }
 
     visualizeArray() {
-        var array = this.state.array
-        SelectionSort(array)
-        //this.setState(SelectionSort(array))
+        this.disableButtons('disable');
 
-        //This Works
-        /*
-        for(let k = 0; k < 10; k++) {
-            setTimeout(() => {
-                console.log(k);
-            }, 1000 * k)
-        }
-        */
+        var array = this.state.array
+        
+        SelectionSort(array, SPEED)
+        .then(() => {
+            this.disableButtons('enable')
+        });
     }
 
 
@@ -67,10 +85,10 @@ export default class Display extends React.Component {
                     <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/" id='header_title'>Sorting Algorithm Visualizer</Navbar.Brand>
                         <Nav className="mr-auto">
-                            <Nav.Link className='nav_link' onClick={() => this.visualizeArray()}>Selection Sort</Nav.Link>
-                            <Nav.Link className='nav_link'>Bubble Sort</Nav.Link>
-                            <Nav.Link className='nav_link'>Merge Sort</Nav.Link>
-                            <Nav.Link className='nav_link' id='random_button' onClick={() => this.randomizeArray()}>Randomize Array</Nav.Link>
+                            <button className='nav_link' onClick={() => this.visualizeArray()}>Selection Sort</button>
+                            <button className='nav_link'>Bubble Sort</button>
+                            <button className='nav_link'>Merge Sort</button>
+                            <button className='nav_link' onClick={() => this.randomizeArray()}>Randomize Array</button>
                         </Nav>
                     </Navbar>
                 </div>
@@ -85,5 +103,3 @@ export default class Display extends React.Component {
         )
     }
 }
-
-// <div className='bar' key={id} style={{height:`${this.state.height[id]}px`, margin:`${this.state.margin[id]}px`}}>

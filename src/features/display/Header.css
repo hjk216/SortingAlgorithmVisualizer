@@ -6,11 +6,13 @@
     color: white !important;
 }
 
-#random_button {
-    color: orangered !important;
+
+.nav_link {
+    color: white !important;
+    background: none;
+    border: none;
 }
 
-.nav_link:hover, #random_button:hover {
-    cursor: pointer !important;
-    color: greenyellow !important;
+.nav_link:hover {
+    color: gold !important;
 }

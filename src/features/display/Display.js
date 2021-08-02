@@ -10,7 +10,7 @@ import './Header.css';
 
 
 
-const ARRAY_LENGTH = 50;
+const ARRAY_LENGTH = 8;
 
 const SPEED = 50;
 

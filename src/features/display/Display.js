@@ -10,9 +10,9 @@ import './Header.css';
 
 
 
-const ARRAY_LENGTH = 100;
+const ARRAY_LENGTH = 50;
 
-const SPEED = 100;
+const SPEED = 50;
 
 
 

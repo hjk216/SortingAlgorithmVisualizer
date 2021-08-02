@@ -1,9 +1,9 @@
 export default async function SelectionSort(array, speed) {
-    const bars = document.getElementsByClassName('bar')
+    const bars = document.getElementsByClassName('bar');
 
     // For Each Element
     for(let i = 0; i < array.length; i++) {
-        let smallest = i
+        let smallest = i;
 
         bars[i].style.backgroundColor = 'red';
         // Loop Through Array
@@ -34,18 +34,18 @@ export default async function SelectionSort(array, speed) {
         bars[i].style.backgroundColor = 'green';
 
         // Swap Array Elements
-        let temp = array[i]
-        array[i] = array[smallest]
-        array[smallest] = temp
+        let temp = array[i];
+        array[i] = array[smallest];
+        array[smallest] = temp;
     
         // Animation
-        bars[i].style.height = `${array[i] * 5.5}px` 
-        bars[smallest].style.height = `${array[smallest] * 5.5}px` 
+        bars[i].style.height = `${array[i] * 5.5}px`;
+        bars[smallest].style.height = `${array[smallest] * 5.5}px`;
         bars[array.length - 1].style.backgroundColor = 'green';
 
     bars[array.length - 1].style.backgroundColor = 'green';
     bars[smallest].style.backgroundColor = 'green';
     }
     
-    return array
+    return array;
 }

@@ -1,14 +1,16 @@
-import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 
-import SelectionSort from '../algorithms/selectionSort'
+import SelectionSort from '../algorithms/selectionSort';
+import BubbleSort from '../algorithms/bubbleSort';
+import MergeSort from '../algorithms/mergeSort';
 
-import './Display.css'
-import './Header.css'
+import './Display.css';
+import './Header.css';
 
 
 
-const ARRAY_LENGTH = 10;
+const ARRAY_LENGTH = 100;
 
 const SPEED = 100;
 
@@ -63,12 +65,38 @@ export default class Display extends React.Component {
 
     }
 
-    visualizeArray() {
+    selectionSort() {
         this.disableButtons('disable');
 
         var array = this.state.array
-        
+
         SelectionSort(array, SPEED)
+        .then(() => {
+            this.disableButtons('enable')
+        });
+    }
+
+
+
+    bubbleSort() {
+        this.disableButtons('disable');
+
+        var array = this.state.array
+
+        BubbleSort(array, SPEED)
+        .then(() => {
+            this.disableButtons('enable')
+        });
+    }
+
+
+
+    mergeSort() {
+        this.disableButtons('disable');
+
+        var array = this.state.array
+
+        MergeSort(array, SPEED)
         .then(() => {
             this.disableButtons('enable')
         });
@@ -85,9 +113,9 @@ export default class Display extends React.Component {
                     <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/" id='header_title'>Sorting Algorithm Visualizer</Navbar.Brand>
                         <Nav className="mr-auto">
-                            <button className='nav_link' onClick={() => this.visualizeArray()}>Selection Sort</button>
-                            <button className='nav_link'>Bubble Sort</button>
-                            <button className='nav_link'>Merge Sort</button>
+                            <button className='nav_link' onClick={() => this.selectionSort()}>Selection Sort</button>
+                            <button className='nav_link' onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                            <button className='nav_link' onClick={() => this.mergeSort()}>Merge Sort</button>
                             <button className='nav_link' onClick={() => this.randomizeArray()}>Randomize Array</button>
                         </Nav>
                     </Navbar>

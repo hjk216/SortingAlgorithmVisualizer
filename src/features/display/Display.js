@@ -3,14 +3,14 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 import SelectionSort from '../algorithms/selectionSort';
 import BubbleSort from '../algorithms/bubbleSort';
-import MergeSort from '../algorithms/mergeSort';
+import MergeSort, { VisualizeMergeSort } from '../algorithms/mergeSort';
 
 import './Display.css';
 import './Header.css';
 
 
 
-const ARRAY_LENGTH = 8;
+const ARRAY_LENGTH = 100;
 
 const SPEED = 50;
 
@@ -96,10 +96,11 @@ export default class Display extends React.Component {
 
         var array = this.state.array
 
-        MergeSort(array, SPEED)
-        .then(() => {
-            this.disableButtons('enable')
-        });
+        MergeSort(array).then((visualization_array) => {
+            VisualizeMergeSort(visualization_array, SPEED).then(() => {
+                this.disableButtons('enable');
+            })
+        })
     }
 
 

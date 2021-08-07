@@ -1,59 +1,50 @@
-export default async function MergeSort(array, speed) {
-    //const bars = document.getElementsByClassName('bar');
+var visualization_array = []
 
-    //array = [6,7,8,9,1,2,3,4] // Testing
-    array = [8,2,5,3,7,9,1,6,3,3]
-
-    console.log(array); // Testing
+export default async function MergeSort(array) {
 
     merge_sort(array, 0, array.length - 1);
-    //var q = Math.floor((0 + array.length) / 2); // Testing
-    //merge(array, 0, q, array.length - 1) // Testing
-    console.log(array); // Testing
 
-    return array;
+    return visualization_array;
+
 }
 
 
 
-function merge_sort(array, p, r) {
-    if(p < r) {
-        var q = Math.floor((p + r) / 2);
+async function merge_sort(array, start, end) {
+    if(start < end) {
+        var middle = Math.floor((start + end) / 2);
+ 
+        merge_sort(array, start, middle);
 
-        merge_sort(array, p, q);
-        merge_sort(array, q + 1, r);
-        merge(array, p, q, r);
+        merge_sort(array, middle + 1, end);
+
+        merge(array, start, middle, end);
     }
 }
 
 
 
-function merge(array, p, q, r) {
-    var n1 = q - p + 1;
-    var n2 = r - q + 1;
-    
-    //console.log('   N1: ' + n1); // Testing
-    //console.log('   N2: ' + n2); // Testing
-    //console.log(' '); // Testing
+// Merge Array
+async function merge(array, start, middle, end) {
+    var n1 = middle - start + 1;
+    var n2 = end - middle + 1;
 
     var left = [];
     var right = [];
 
+    // Add Values to Temp Arrays
     for(var i = 0; i < n1; i++) {
-        left.push(array[p + i]);
+        left.push(array[start + i]);
     }
     for(var j = 1; j < n2; j++) {
-        right.push(array[q + j]);
+        right.push(array[middle + j]);
     }
-
-    //console.log('LEFT : ' +  left); // Testing
-    //console.log('RIGHT: ' + right); // Testing
-    //console.log(' '); // Testing
 
     i = 0;
     j = 0;
 
-    for(var k = p; k < r + 1; k++) {
+    // Sort Two Arrays
+    for(var k = start; k < end + 1; k++) {
         if(i > (left.length - 1)) {
             array[k] = right[j];
             j = j + 1;
@@ -74,71 +65,40 @@ function merge(array, p, q, r) {
             j = j + 1;
         }
     }
-    //console.log('ARRAY: ' + array); // Testing
+
+    // Add Information (Start, End, Current Array) To Visualization Array
+    var visualization_info = [];
+    var start_end = [start, end];
+    let array_info = array.slice(0, array.length);
+    visualization_info.push(start_end);
+    visualization_info.push(array_info);
+    visualization_array.push(visualization_info);
 }
 
 
 
+// Animate Merge Sort
+export async function VisualizeMergeSort(visualization_array, speed) {
+    const bars = document.getElementsByClassName('bar');
 
-/* 
-function merge_sort(array, p, r) {
-    if(p < r) {
-        var q = Math.floor((p + r) / 2);
+    for(var i = 0; i < visualization_array.length; i++) {
+        var index = visualization_array[i][0];
 
-        merge_sort(array, p, q);
-        merge_sort(array, q + 1, r);
-        merge(array, p, q, r);
+        // Color Bars
+        for(var j = index[0]; j <= index[1]; j++) {
+            bars[j].style.backgroundColor = 'red';
+            await new Promise((resolve) => setTimeout(resolve, speed));
+        }
+
+        // Merge
+        for(var k = index[0]; k <= index[1]; k++) {
+            bars[k].style.height = `${visualization_array[i][1][k] * 5.5}px`;
+            await new Promise((resolve) => setTimeout(resolve, speed));
+        }
+
+        // Revert Color to Original
+        for(var g = 0; g < bars.length; g++) {
+            bars[g].style.backgroundColor = 'green';
+        }
     }
 }
-
-
-
-function merge(array, p, q, r) {
-    var n1 = q - p + 1;
-    var n2 = r - q + 1;
-    
-    //console.log('   N1: ' + n1); // Testing
-    //console.log('   N2: ' + n2); // Testing
-    //console.log(' '); // Testing
-
-    var left = [];
-    var right = [];
-
-    for(var i = 0; i < n1; i++) {
-        left.push(array[p + i]);
-    }
-    for(var j = 1; j < n2; j++) {
-        right.push(array[q + j]);
-    }
-
-    //console.log('LEFT : ' +  left); // Testing
-    //console.log('RIGHT: ' + right); // Testing
-    //console.log(' '); // Testing
-
-    i = 0;
-    j = 0;
-
-    for(var k = p; k < r + 1; k++) {
-        if(i > (left.length - 1)) {
-            array[k] = right[j];
-            j = j + 1;
-            continue;
-        }
-        if(j > (right.length - 1)) {
-            array[k] = left[i];
-            i = i + 1;
-            continue;
-        }
-
-        if(left[i] <= right[j]) {
-            array[k] = left[i];
-            i = i + 1;
-        }
-        else {
-            array[k] = right[j];
-            j = j + 1;
-        }
-    }
-    //console.log('ARRAY: ' + array); // Testing
-}
-*/

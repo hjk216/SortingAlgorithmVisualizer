@@ -11,7 +11,7 @@ This project is a sorting algorithm visualizer. An array is represented as verti
     - Lower Bound: Ω(n)
 - Merge Sort
     - Upper Bound: O(n log n)
-    - Lower Bound: O(n log n)
+    - Lower Bound: Ω(n log n)
 
 ### Technology Used
 This application is purely front-end, built using React. 

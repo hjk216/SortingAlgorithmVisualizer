@@ -1,5 +1,8 @@
 var visualization_array = []
 
+// Psuedocode used from,
+// Corman, T., Leiserson, C., Rivest, R., and Stein, C. (2009). Introduction to Algorithms (Third Edition). The MIT Press.
+
 export default async function MergeSort(array) {
 
     merge_sort(array, 0, array.length - 1);

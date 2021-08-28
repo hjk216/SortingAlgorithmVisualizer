@@ -33,6 +33,7 @@ export default class Display extends React.Component {
 
 
 
+    // Disables buttons while algorithm is running
     disableButtons(action) {
         var buttons = document.getElementsByClassName('nav_link');
         if(action === 'disable') {
@@ -65,6 +66,8 @@ export default class Display extends React.Component {
 
     }
 
+
+
     selectionSort() {
         this.disableButtons('disable');
 
@@ -96,6 +99,8 @@ export default class Display extends React.Component {
 
         var array = this.state.array
 
+        // Runs the merge sort algorithm and stores data at each iteration in an array.
+        // Then VisualizeMergeSort animates the array for the user.
         MergeSort(array).then((visualization_array) => {
             VisualizeMergeSort(visualization_array, SPEED).then(() => {
                 this.disableButtons('enable');

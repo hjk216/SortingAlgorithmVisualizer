@@ -1,9 +1,10 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
-import SelectionSort from '../algorithms/selectionSort';
 import BubbleSort from '../algorithms/bubbleSort';
+import InsertionSort from '../algorithms/insertionSort';
 import MergeSort, { VisualizeMergeSort } from '../algorithms/mergeSort';
+import SelectionSort from '../algorithms/selectionSort';
 
 import './Display.css';
 import './Header.css';
@@ -12,7 +13,7 @@ import './Header.css';
 
 const ARRAY_LENGTH = 100;
 
-const SPEED = 50;
+const SPEED = 100;
 
 
 
@@ -53,30 +54,17 @@ export default class Display extends React.Component {
 
 
     randomizeArray() {
-        var array = []
+        var array = [];
 
         while(array.length < ARRAY_LENGTH) {
             var randomIndex = Math.floor(Math.random() * (ARRAY_LENGTH + 2))
 
             if(!(array.includes(randomIndex)) && randomIndex > 1) {
-                array.push(randomIndex)
+                array.push(randomIndex);
             }
         }
-        this.setState({array})
+        this.setState({array});
 
-    }
-
-
-
-    selectionSort() {
-        this.disableButtons('disable');
-
-        var array = this.state.array
-
-        SelectionSort(array, SPEED)
-        .then(() => {
-            this.disableButtons('enable')
-        });
     }
 
 
@@ -84,11 +72,24 @@ export default class Display extends React.Component {
     bubbleSort() {
         this.disableButtons('disable');
 
-        var array = this.state.array
+        var array = this.state.array;
 
         BubbleSort(array, SPEED)
         .then(() => {
-            this.disableButtons('enable')
+            this.disableButtons('enable');
+        });
+    }
+
+
+
+    insertionSort() {
+        this.disableButtons('disable');
+
+        var array = this.state.array;
+
+        InsertionSort(array, SPEED)
+        .then(() => {
+            this.disableButtons('enable');
         });
     }
 
@@ -97,7 +98,7 @@ export default class Display extends React.Component {
     mergeSort() {
         this.disableButtons('disable');
 
-        var array = this.state.array
+        var array = this.state.array;
 
         // Runs the merge sort algorithm and stores data at each iteration in an array.
         // Then VisualizeMergeSort animates the array for the user.
@@ -106,6 +107,19 @@ export default class Display extends React.Component {
                 this.disableButtons('enable');
             })
         })
+    }
+
+
+
+    selectionSort() {
+        this.disableButtons('disable');
+
+        var array = this.state.array;
+
+        SelectionSort(array, SPEED)
+        .then(() => {
+            this.disableButtons('enable');
+        });
     }
 
 
@@ -119,9 +133,10 @@ export default class Display extends React.Component {
                     <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/" id='header_title'>Sorting Algorithm Visualizer</Navbar.Brand>
                         <Nav className="mr-auto">
-                            <button className='nav_link' onClick={() => this.selectionSort()}>Selection Sort</button>
                             <button className='nav_link' onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                            <button className='nav_link' onClick={() => this.insertionSort()}>Insertion Sort</button>
                             <button className='nav_link' onClick={() => this.mergeSort()}>Merge Sort</button>
+                            <button className='nav_link' onClick={() => this.selectionSort()}>Selection Sort</button>
                             <button className='nav_link' onClick={() => this.randomizeArray()}>Randomize Array</button>
                         </Nav>
                     </Navbar>

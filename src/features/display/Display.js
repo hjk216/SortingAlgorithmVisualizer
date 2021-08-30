@@ -34,7 +34,7 @@ export default class Display extends React.Component {
 
 
 
-    // Disables buttons while algorithm is running
+    // Disables buttons while algorithm is running, enables after
     disableButtons(action) {
         var buttons = document.getElementsByClassName('nav_link');
         if(action === 'disable') {

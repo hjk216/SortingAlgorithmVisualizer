@@ -130,7 +130,7 @@ export default class Display extends React.Component {
         return (
             <div>
                 <div id='header'>
-                    <Navbar bg="dark" variant="dark">
+                    <Navbar>
                     <Navbar.Brand href="/" id='header_title'>Sorting Algorithm Visualizer</Navbar.Brand>
                         <Nav className="mr-auto">
                             <button className='nav_link' onClick={() => this.bubbleSort()}>Bubble Sort</button>
@@ -148,7 +148,21 @@ export default class Display extends React.Component {
                         </div>
                     ))}
                 </div>
+                <div id='controls_box'>
+                    <div className='control'>
+                        <lablel>Speed (1-100): </lablel>
+                        <input></input>
+                    </div>
+                    
+                    <div className='control'>
+                        <lablel>Bars (1-100): </lablel>
+                        <input></input>
+                    </div>
+                </div>
+
             </div>
         )
     }
 }
+
+/* <Navbar bg="dark" variant="dark">  */

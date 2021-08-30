@@ -1,6 +1,6 @@
 #display_box {
     width: 1000px;
-    height: 600px;
+    height: 570px;
     border: 4px solid darkslategrey;
     position: relative;
 
@@ -17,4 +17,18 @@
 
     background-color: green;
     width: 7px;
+}
+
+#header {
+    margin-bottom: -20px !important;
+}
+
+#controls_box {
+    color: black;
+    float:left;
+}
+
+.control {
+    display: inline-block;
+    margin-left: 30px;
 }

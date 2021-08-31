@@ -32,3 +32,9 @@
     display: inline-block;
     margin-left: 30px;
 }
+
+#speed_toggle, #bar_toggle {
+    background-color: black;
+    color: white;
+    border: black;
+}

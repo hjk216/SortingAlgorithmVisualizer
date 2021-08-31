@@ -81,12 +81,17 @@ export default class Display extends React.Component {
                 buttons[b].style.opacity = 0.5;
                 buttons[b].disabled = 'true';
             }
+            document.getElementById('speed_toggle').disabled = 'true';
+            document.getElementById('bar_toggle').disabled = 'true';
+            
         }
         else {
             for(var c = 0; c < buttons.length; c++) {
                 buttons[c].style.opacity = 1;
                 buttons[c].disabled = false;
             }
+            document.getElementById('speed_toggle').disabled = '';
+            document.getElementById('bar_toggle').disabled = '';
         }
     }
 
@@ -191,7 +196,7 @@ export default class Display extends React.Component {
  
                     <div className='control'>
                         <Dropdown onSelect={this.onSpeedChange}>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            <Dropdown.Toggle variant="success" id="speed_toggle">
                                 Speed: {this.state.speed_name}
                             </Dropdown.Toggle>
 
@@ -207,7 +212,7 @@ export default class Display extends React.Component {
 
                     <div className='control'>
                         <Dropdown onSelect={this.onBarChange}>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            <Dropdown.Toggle variant="success" id="bar_toggle">
                                 Number of Bars: {this.state.array_length}
                             </Dropdown.Toggle>
 

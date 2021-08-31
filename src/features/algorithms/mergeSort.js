@@ -89,7 +89,7 @@ export async function VisualizeMergeSort(visualization_array, speed) {
 
         // Color Bars
         for(var j = index[0]; j <= index[1]; j++) {
-            bars[j].style.backgroundColor = 'red';
+            bars[j].style.backgroundColor = 'orange';
             await new Promise((resolve) => setTimeout(resolve, speed));
         }
 
@@ -101,7 +101,7 @@ export async function VisualizeMergeSort(visualization_array, speed) {
 
         // Revert Color to Original
         for(var g = 0; g < bars.length; g++) {
-            bars[g].style.backgroundColor = 'green';
+            bars[g].style.backgroundColor = 'black';
         }
     }
 }

@@ -3,8 +3,8 @@ export default async function BubbleSort(array, speed) {
 
     for(var i = 0; i < array.length; i++) {
         for(var j = 1; j < array.length - i; j++) {
-            bars[j-1].style.backgroundColor = 'red';
-            bars[j].style.backgroundColor = 'red';
+            bars[j-1].style.backgroundColor = 'orange';
+            bars[j].style.backgroundColor = 'orange';
 
             // If first element greater than second element, swap
             if(array[j-1] > array[j]) {
@@ -23,8 +23,8 @@ export default async function BubbleSort(array, speed) {
                 }, speed)
             );
 
-            bars[j-1].style.backgroundColor = 'green';
-            bars[j].style.backgroundColor = 'green';
+            bars[j-1].style.backgroundColor = 'black';
+            bars[j].style.backgroundColor = 'black';
 
         }
     }

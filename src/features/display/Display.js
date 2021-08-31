@@ -11,12 +11,6 @@ import './Header.css';
 
 
 
-//const ARRAY_LENGTH = 100;
-
-//const SPEED = 100;
-
-
-
 export default class Display extends React.Component {
     constructor(props) {
         super(props);

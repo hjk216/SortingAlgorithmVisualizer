@@ -6,8 +6,8 @@ export default async function InsertionSort(array, speed) {
         var j = i - 1;
 
         while(array[j] > current_item && j >= 0) {
-            bars[j].style.backgroundColor = 'red';
-            bars[j + 1].style.backgroundColor = 'red';
+            bars[j].style.backgroundColor = 'orange';
+            bars[j + 1].style.backgroundColor = 'orange';
 
             array[j + 1] = array[j];
             j = j - 1;
@@ -20,11 +20,11 @@ export default async function InsertionSort(array, speed) {
             );
 
             bars[j + 2].style.height = `${array[j + 1] * 5.5}px`;
-            bars[j + 1].style.backgroundColor = 'green';
-            bars[j + 2].style.backgroundColor = 'green';
+            bars[j + 1].style.backgroundColor = 'black';
+            bars[j + 2].style.backgroundColor = 'black';
         }
         array[j + 1] = current_item;
-        bars[i].style.backgroundColor = 'green';
+        bars[i].style.backgroundColor = 'black';
         bars[j + 1].style.height = `${array[j + 1] * 5.5}px`;
     }
 }

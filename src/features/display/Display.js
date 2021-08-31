@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 
 import BubbleSort from '../algorithms/bubbleSort';
 import InsertionSort from '../algorithms/insertionSort';
@@ -11,9 +11,9 @@ import './Header.css';
 
 
 
-const ARRAY_LENGTH = 100;
+//const ARRAY_LENGTH = 100;
 
-const SPEED = 100;
+//const SPEED = 100;
 
 
 
@@ -23,13 +23,34 @@ export default class Display extends React.Component {
 
         this.state = {
             array: [],
+            array_length: 100,
+            speed: 50,
         };
+
+        this.onSpeedChange = this.onSpeedChange.bind(this);
+        this.onBarChange = this.onBarChange.bind(this);
     }
 
 
 
     componentDidMount() {
         this.randomizeArray();
+    }
+
+
+
+    onSpeedChange(event) {
+        var speed = parseInt(event);
+        this.setState({speed});
+    }
+
+
+
+    onBarChange(event) {
+        var array_length = parseInt(event);
+        this.setState({array_length});
+        this.randomizeArray();
+        console.log(this.state.array_length);
     }
 
 
@@ -56,8 +77,8 @@ export default class Display extends React.Component {
     randomizeArray() {
         var array = [];
 
-        while(array.length < ARRAY_LENGTH) {
-            var randomIndex = Math.floor(Math.random() * (ARRAY_LENGTH + 2))
+        while(array.length < this.state.array_length) {
+            var randomIndex = Math.floor(Math.random() * (this.state.array_length + 2))
 
             if(!(array.includes(randomIndex)) && randomIndex > 1) {
                 array.push(randomIndex);
@@ -74,7 +95,7 @@ export default class Display extends React.Component {
 
         var array = this.state.array;
 
-        BubbleSort(array, SPEED)
+        BubbleSort(array, this.state.speed)
         .then(() => {
             this.disableButtons('enable');
         });
@@ -87,7 +108,7 @@ export default class Display extends React.Component {
 
         var array = this.state.array;
 
-        InsertionSort(array, SPEED)
+        InsertionSort(array, this.state.speed)
         .then(() => {
             this.disableButtons('enable');
         });
@@ -103,7 +124,7 @@ export default class Display extends React.Component {
         // Runs the merge sort algorithm and stores data at each iteration in an array.
         // Then VisualizeMergeSort animates the array for the user.
         MergeSort(array).then((visualization_array) => {
-            VisualizeMergeSort(visualization_array, SPEED).then(() => {
+            VisualizeMergeSort(visualization_array, this.state.speed).then(() => {
                 this.disableButtons('enable');
             })
         })
@@ -116,7 +137,7 @@ export default class Display extends React.Component {
 
         var array = this.state.array;
 
-        SelectionSort(array, SPEED)
+        SelectionSort(array, this.state.speed)
         .then(() => {
             this.disableButtons('enable');
         });
@@ -148,21 +169,44 @@ export default class Display extends React.Component {
                         </div>
                     ))}
                 </div>
+
                 <div id='controls_box'>
+ 
                     <div className='control'>
-                        <lablel>Speed (1-100): </lablel>
-                        <input></input>
+                        <Dropdown onSelect={this.onSpeedChange}>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Speed
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item eventKey='5'>Fast</Dropdown.Item>
+                                <Dropdown.Item eventKey='10'>Faster</Dropdown.Item>
+                                <Dropdown.Item eventKey='50'>Medium</Dropdown.Item>
+                                <Dropdown.Item eventKey='100'>Slower</Dropdown.Item>
+                                <Dropdown.Item eventKey='200'>Slow</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
-                    
+
                     <div className='control'>
-                        <lablel>Bars (1-100): </lablel>
-                        <input></input>
+                        <Dropdown onSelect={this.onBarChange}>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Number of Bars
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item eventKey='100'>100</Dropdown.Item>
+                                <Dropdown.Item eventKey='80'>80</Dropdown.Item>
+                                <Dropdown.Item eventKey='60'>60</Dropdown.Item>
+                                <Dropdown.Item eventKey='40'>40</Dropdown.Item>
+                                <Dropdown.Item eventKey='20'>20</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
+
                 </div>
 
             </div>
         )
     }
 }
-
-/* <Navbar bg="dark" variant="dark">  */

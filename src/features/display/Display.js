@@ -25,6 +25,7 @@ export default class Display extends React.Component {
             array: [],
             array_length: 100,
             speed: 50,
+            speed_name: 'Medium',
         };
 
         this.onSpeedChange = this.onSpeedChange.bind(this);
@@ -42,15 +43,32 @@ export default class Display extends React.Component {
     onSpeedChange(event) {
         var speed = parseInt(event);
         this.setState({speed});
+
+        var speed_name = 'Medium';
+        if(speed === 5) {speed_name = 'Fast';}
+        else if(speed === 10) {speed_name = 'Faster';}
+        else if(speed === 50) {speed_name = 'Medium';}
+        else if(speed === 100) {speed_name = 'Slower';}
+        else {speed_name = 'Slow';}
+
+        this.setState({speed_name});
     }
 
 
 
     onBarChange(event) {
         var array_length = parseInt(event);
-        this.setState({array_length});
-        this.randomizeArray();
-        console.log(this.state.array_length);
+
+        if(array_length <= this.state.array_length) {
+            this.setState({array_length}, () => {
+                this.randomizeArray();
+            });
+        }
+        else {
+            this.setState({array_length}, () => {
+                this.randomizeArray();
+            });
+        }
     }
 
 
@@ -85,7 +103,6 @@ export default class Display extends React.Component {
             }
         }
         this.setState({array});
-
     }
 
 
@@ -175,7 +192,7 @@ export default class Display extends React.Component {
                     <div className='control'>
                         <Dropdown onSelect={this.onSpeedChange}>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Speed
+                                Speed: {this.state.speed_name}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
@@ -191,7 +208,7 @@ export default class Display extends React.Component {
                     <div className='control'>
                         <Dropdown onSelect={this.onBarChange}>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Number of Bars
+                                Number of Bars: {this.state.array_length}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
